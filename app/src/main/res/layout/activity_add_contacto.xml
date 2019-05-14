@@ -12,9 +12,9 @@
         style="@style/TextView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Nombre:"
+        android:text="@string/nombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText4" />
+        app:layout_constraintTop_toTopOf="@+id/editTextNombre" />
 
     <TextView
         android:id="@+id/textViewApellidos"
@@ -24,10 +24,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Apellidos:"
+        android:text="@string/apellidos"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText5" />
+        app:layout_constraintTop_toTopOf="@+id/editTextApellidos" />
 
     <TextView
         android:id="@+id/textView4"
@@ -35,7 +35,7 @@
 
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Telefono:"
+        android:text="@string/telefono"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextTelefono" />
 
@@ -45,7 +45,7 @@
 
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="E-Mail:"
+        android:text="@string/e_mail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewTelef" />
 
@@ -86,12 +86,11 @@
     <EditText
         android:id="@+id/editTextTelefono"
         style="@style/edittext"
-
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text=""
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextApellidos" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -101,30 +100,28 @@
         app:layout_constraintGuide_begin="88dp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextNombre"
         style="@style/edittext"
         android:layout_width="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editTextApellidos"
         style="@style/edittext"
         android:layout_width="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
     <Button
         android:id="@+id/button"
@@ -135,7 +132,7 @@
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editTextTelefono"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextApellidos" />
 
     <Button
         android:id="@+id/button2"

@@ -20,10 +20,10 @@ public interface ContactosDao {
     public  void updateContacto(Contacto contacto);
 
     @Query("SELECT * FROM Contacto ORDER BY nombre")
-    public LiveData<ArrayList<Contacto>> getContacto();
+    public ArrayList<Contacto> getContactos();
 
     @Query("SELECT * FROM Contacto WHERE nombre like :string  ORDER BY nombre")
-    public LiveData<ArrayList<Contacto>> getContactoNombre(String string);
+    public ArrayList<Contacto> getContactosFiltro(String string);
 
     @Insert
     public void insertEmail(Email... emails);
@@ -32,7 +32,7 @@ public interface ContactosDao {
     @Update
     public void updateEmail(Email email);
     @Query("SELECT * FROM Email WHERE ownerId=:id")
-    public LiveData<ArrayList<Email>> getEmailContacto(int id);
+    public LiveData<ArrayList<Email>> getEmailsContacto(int id);
 
     @Insert
     public void insertTelefono(Telefono... telefonos);
@@ -41,6 +41,6 @@ public interface ContactosDao {
     @Update
     public void updateTelefono(Telefono telefono);
     @Query("SELECT * FROM Email WHERE ownerId=:id")
-    public LiveData<ArrayList<Telefono>> getEmailTelefono(int id);
+    public LiveData<ArrayList<Telefono>> getTelefonosContacto(int id);
 
 }
