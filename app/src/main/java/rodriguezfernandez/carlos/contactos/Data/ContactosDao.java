@@ -20,10 +20,10 @@ public interface ContactosDao {
       void updateContacto(Contacto contacto);
 
     @Query("SELECT * FROM Contacto ORDER BY nombre")
-    List<Contacto> getContactos();
+    LiveData<List<Contacto>> getContactos();
 
     @Query("SELECT * FROM Contacto WHERE nombre like :string  ORDER BY nombre")
-     List<Contacto> getContactosFiltro(String string);
+     LiveData<List<Contacto>> getContactosFiltro(String string);
 
     @Insert
      void insertEmail(Email... emails);

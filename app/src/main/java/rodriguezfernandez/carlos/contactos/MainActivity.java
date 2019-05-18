@@ -1,17 +1,28 @@
 package rodriguezfernandez.carlos.contactos;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+
+import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
 public class MainActivity extends AppCompatActivity {
-
+    EditText campoBusqueda;
+    RecyclerView listaContactosRecycler;
+    ArrayList<Contacto> contactos;
+    AndroidViewModel viewModelMainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentNewContacto);
             }
         });
+        configurar();
+    }
+
+    private void configurar() {
+        //Recuperar el viewModel
+        viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);
+        contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
+        campoBusqueda=findViewById(R.id.editText_busqueda);
+        listaContactosRecycler=findViewById(R.id.ReciclerlistaContactos);
+
+        ContactosAdapter contactosAdapter=new ContactosAdapter(this,contactos);
+        listaContactosRecycler.setAdapter(contactosAdapter);
+        listaContactosRecycler.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
