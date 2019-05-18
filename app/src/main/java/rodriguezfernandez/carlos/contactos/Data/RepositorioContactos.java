@@ -12,6 +12,7 @@ public class RepositorioContactos {
     private ContactosDao dao;
 //Constructor
 public RepositorioContactos(Application application){
+    ///Instanciar el dao.
         dao=ContactosDB.getINSTANCE(application).getDao();
     }
 //Operaciones basicas con contactos.
@@ -29,10 +30,10 @@ public RepositorioContactos(Application application){
     };
 
 // Obtener listas de contactos.
-    public List<Contacto> getContactos(){
+    public LiveData<List<Contacto>> getContactos(){
        return dao.getContactos();
     };
-    public List<Contacto> getContactosFiltro(String s){
+    public LiveData<List<Contacto>> getContactosFiltro(String s){
         return dao.getContactosFiltro(s);
     }
 

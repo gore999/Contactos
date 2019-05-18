@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
 class ContactosAdapter extends Adapter<ContactosAdapter.ContactosViewHolder> {
-    ArrayList<Contacto> contactosArrayList;
+    List<Contacto> contactosArrayList;
     LayoutInflater inflater;
-    ContactosAdapter(Context context, ArrayList<Contacto> contactos){
+    ContactosAdapter(Context context, List<Contacto> contactos){
         inflater=LayoutInflater.from(context);
         contactosArrayList=contactos;
     }
@@ -35,10 +36,15 @@ class ContactosAdapter extends Adapter<ContactosAdapter.ContactosViewHolder> {
 
     @Override
     public int getItemCount() {
+        if(contactosArrayList==null)return 0;
         return contactosArrayList.size();
     }
 
-     class ContactosViewHolder extends RecyclerView.ViewHolder {
+    public void setContactos(List<Contacto> contactos) {
+        contactosArrayList=contactos;
+    }
+
+    class ContactosViewHolder extends RecyclerView.ViewHolder {
         TextView nombre;
         TextView apellidos;
         public ContactosViewHolder(@NonNull View itemView, ContactosAdapter adp) {

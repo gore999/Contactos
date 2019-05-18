@@ -1,9 +1,11 @@
 package rodriguezfernandez.carlos.contactos;
 
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,13 +17,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
 public class MainActivity extends AppCompatActivity {
     EditText campoBusqueda;
     RecyclerView listaContactosRecycler;
-    ArrayList<Contacto> contactos;
+    List<Contacto> contactos;
     AndroidViewModel viewModelMainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +45,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configurar() {
+        final ContactosAdapter contactosAdapter=new ContactosAdapter(this,contactos);
         //Recuperar el viewModel
         viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);
-        contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
+        ((ViewModelMainActivity) viewModelMainActivity).getContactos().observe(this, new Observer<List<Contacto>>() {
+            @Override
+            public void onChanged(@Nullable List<Contacto> contactos) {
+                contactosAdapter.setContactos(contactos);
+            }
+        });
+        //contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
         campoBusqueda=findViewById(R.id.editText_busqueda);
         listaContactosRecycler=findViewById(R.id.ReciclerlistaContactos);
 
-        ContactosAdapter contactosAdapter=new ContactosAdapter(this,contactos);
+
         listaContactosRecycler.setAdapter(contactosAdapter);
         listaContactosRecycler.setLayoutManager(new LinearLayoutManager(this));
 
