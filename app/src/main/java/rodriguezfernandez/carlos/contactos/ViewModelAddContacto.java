@@ -18,16 +18,9 @@ public class ViewModelAddContacto extends AndroidViewModel {
         super(application);
         rep=new RepositorioContactos(application);
         contacto=new Contacto();//Se crea un contacto vacio.
-        contacto.setNombre("a");
-        contacto.setApellidos("b");
+        //Le añadimos dos arrayList para almacenar
         contacto.setEmails(new ArrayList<Email>());
-        ArrayList<Telefono> teprubList=new ArrayList<>();
-        Telefono tpruebas=new Telefono();
-        tpruebas.setTelefono(658633125);
-        teprubList.add(tpruebas);
-        contacto.setTelefonos(teprubList);
-
-        //contacto.setTelefonos(new ArrayList<Telefono>());
+        contacto.setTelefonos(new ArrayList<Telefono>());
     }
 
     public void saveContacto(){

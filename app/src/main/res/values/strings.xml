@@ -7,4 +7,7 @@
     <string name="e_mail">E-Mail:</string>
     <string name="add">Add</string>
     <string name="a_adir_contacto">Añadir Contacto</string>
+    <string name="no_nombre">Debe introducir un nombre</string>
+    <string name="no_apellido">Debe introducir los apellidos</string>
+    <string name="no_datos">Debe contener al menos un telefono o email.</string>
 </resources>

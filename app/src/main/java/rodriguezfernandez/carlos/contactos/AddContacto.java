@@ -4,10 +4,12 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ public class AddContacto extends AppCompatActivity {
     ViewModelAddContacto viewModelContacto;
 ///Adaptadores
     telefonoAdapter teladap;
+    EmailAdapter emailadap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +50,104 @@ public class AddContacto extends AppCompatActivity {
         recyEmails=findViewById(R.id.recyclerViewEmail);
         //Vincular el viewModel
         viewModelContacto=ViewModelProviders.of(this).get(ViewModelAddContacto.class);
+    //RecyclerView Telefonos.
         teladap=new telefonoAdapter(this,viewModelContacto.contacto.getTelefonos());
+        //helper
+        ItemTouchHelper ithTelefonos=new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                viewModelContacto.contacto.getTelefonos().remove(viewHolder.getAdapterPosition());
+                teladap.notifyDataSetChanged();
+            }
+        });
         recyTelefonos.setAdapter(teladap);
         recyTelefonos.setLayoutManager(new LinearLayoutManager(this));
+        ithTelefonos.attachToRecyclerView(recyTelefonos);
+//RecyclerView emails.
+        //Crear el adaptador, la lista que se le pasa, es la de los emails.
+        emailadap=new EmailAdapter(this,viewModelContacto.contacto.getEmails());
+        //helper
+        ItemTouchHelper ithEmails=new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                viewModelContacto.contacto.getEmails().remove(viewHolder.getAdapterPosition());
+                emailadap.notifyDataSetChanged();
+            }
+        });
+        recyEmails.setAdapter(emailadap);
+        recyEmails.setLayoutManager(new LinearLayoutManager(this));
+        ithEmails.attachToRecyclerView(recyEmails);
+
     }
 
+
     public void addTelefono(View view) {
-        //Crear un objeto telefono a partir del texto en el edittext.
-        Telefono nuevoTelefono=new Telefono();
-        //Añadimos el telefono al arraylist del contacto, que aun no tiene id asignada.
-        nuevoTelefono.setTelefono(Integer.parseInt(String.valueOf(telefonoEdTxt.getText())));
-        ArrayList<Telefono> telefonosDelContacto=viewModelContacto.contacto.getTelefonos();
-        telefonosDelContacto.add(nuevoTelefono);
-        //TEST: mostrar el contenido del array en un toast.
-        String telefonos="";
-        for(Telefono t: telefonosDelContacto){
-            telefonos+=""+t.getTelefono()+"\n";
+        String valor=telefonoEdTxt.getText().toString();
+        if(valor!="") {
+            //Crear un objeto telefono a partir del texto en el edittext.
+            Telefono nuevoTelefono = new Telefono();
+            //Añadimos el telefono al arraylist del contacto, que aun no tiene id asignada.
+            nuevoTelefono.setTelefono(Integer.parseInt(valor));
+            ArrayList<Telefono> telefonosDelContacto = viewModelContacto.contacto.getTelefonos();
+            telefonosDelContacto.add(nuevoTelefono);
+            //TEST: mostrar el contenido del array en un toast.
+            String telefonos = "";
+            for (Telefono t : telefonosDelContacto) {
+                telefonos += "" + t.getTelefono() + "\n";
+            }
+            Toast.makeText(this, telefonos, Toast.LENGTH_SHORT).show();
+            teladap.notifyDataSetChanged();
         }
-        Toast.makeText(this,telefonos,Toast.LENGTH_SHORT).show();
-        teladap.notifyDataSetChanged();
     }
 
     public void addEmail(View view) {
+        String valor=emailEdTxt.getText().toString();
+        if(valor!="") {
+            Email nuevoEmail = new Email();
+            nuevoEmail.setEmail(emailEdTxt.getText().toString());
+            ArrayList<Email> emailsDelContacto = viewModelContacto.contacto.getEmails();
+            emailsDelContacto.add(nuevoEmail);
+            emailadap.notifyDataSetChanged();
+        }
+
+    }
+
+
+    public void guardarContacto(View view) {
+        viewModelContacto.contacto.setNombre(nombre.getText().toString());
+        viewModelContacto.contacto.setApellidos(apellido.getText().toString());
+        switch (compruebaCampos()){
+            case 0:
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_nombre), Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_apellido), Toast.LENGTH_LONG).show();
+                break;
+            case 2:
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_datos), Toast.LENGTH_LONG).show();
+                break;
+            case -1:// Si todo está correcto.
+                viewModelContacto.saveContacto();
+                break;
+        }
+    }
+
+    //Devuelve un valor entero que representa un estado del contacto. 
+    private int compruebaCampos() {
+        int salida=-1;
+        Contacto c=viewModelContacto.contacto;
+        if(c.getTelefonos().size()==0 & c.getEmails().size()==0)salida=2;//2 es Tiene que guardar algun contacto.
+        if(c.getApellidos()=="")salida=1;//1 es No hay apellidos.
+        if(c.getNombre()=="")salida=0;//0 es No hay nombre
     }
 }
