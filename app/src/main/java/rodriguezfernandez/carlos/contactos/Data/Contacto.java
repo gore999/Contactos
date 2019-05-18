@@ -1,19 +1,16 @@
-package Data;
+package rodriguezfernandez.carlos.contactos.Data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Contacto {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-
     private int id;
     private String nombre;
     private String apellidos;

@@ -1,4 +1,4 @@
-package Data;
+package rodriguezfernandez.carlos.contactos.Data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(foreignKeys = @ForeignKey(entity = Contacto.class,parentColumns = "id",childColumns = "ownerId"))
-class Telefono {
+public class Telefono {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int idTelefono;

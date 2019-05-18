@@ -22,8 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddContacto"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:parentActivityName=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
