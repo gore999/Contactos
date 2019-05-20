@@ -2,38 +2,44 @@ package rodriguezfernandez.carlos.contactos.Data;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RepositorioContactos {
     private ContactosDao dao;
-//Constructor
+    public LiveData<ArrayList<Contacto>> listaContactos;
+
+    //Constructor
 public RepositorioContactos(Application application){
     ///Instanciar el dao.
         dao=ContactosDB.getINSTANCE(application).getDao();
     }
-//Operaciones basicas con contactos.
+
+    //Operaciones basicas con contactos.
     public void insertContacto(Contacto... contactos){
     //Insertamos el contacto en un hilo diferente
         new MyAsyncInsertContacto(dao).execute(contactos[0]);
     };
-
     public void deleteContacto(Contacto contacto){
         dao.deleteContacto(contacto);
     };
-
     public  void updateContacto(Contacto contacto){
         dao.updateContacto(contacto);
     };
 
 // Obtener listas de contactos.
     public LiveData<List<Contacto>> getContactos(){
-       return dao.getContactos();
+
+        return dao.getContactos();
     };
     public LiveData<List<Contacto>> getContactosFiltro(String s){
+        listaContactos.getValue().clear();
+        listaContactos.getValue().addAll((Collection<? extends Contacto>) dao.getContactosFiltro(s));
         return dao.getContactosFiltro(s);
     }
 

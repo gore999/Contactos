@@ -3,6 +3,7 @@ package rodriguezfernandez.carlos.contactos;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -14,14 +15,18 @@ import rodriguezfernandez.carlos.contactos.Data.RepositorioContactos;
 public class ViewModelMainActivity extends AndroidViewModel {
     RepositorioContactos rep;
     LiveData<List<Contacto>> listaContactos;
+
     public ViewModelMainActivity(@NonNull Application application) {
         super(application);
         rep=new RepositorioContactos(application);
-        listaContactos=rep.getContactos();
+        listaContactos=  rep.getContactos();
 
     }
 
     public LiveData<List<Contacto>> getContactos() {
         return listaContactos;
+    }
+    public void getContactosFiltro(String cadena){
+        listaContactos= rep.getContactosFiltro(cadena);
     }
 }

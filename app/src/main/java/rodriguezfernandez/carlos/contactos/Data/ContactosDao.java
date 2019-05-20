@@ -1,6 +1,7 @@
 package rodriguezfernandez.carlos.contactos.Data;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -23,7 +24,7 @@ public interface ContactosDao {
     LiveData<List<Contacto>> getContactos();
 
     @Query("SELECT * FROM Contacto WHERE nombre like :string  ORDER BY nombre")
-     LiveData<List<Contacto>> getContactosFiltro(String string);
+    LiveData<List<Contacto>> getContactosFiltro(String string);
 
     @Insert
      void insertEmail(Email... emails);
@@ -32,7 +33,7 @@ public interface ContactosDao {
     @Update
      void updateEmail(Email email);
     @Query("SELECT * FROM Email WHERE ownerId=:id")
-     LiveData<List<Email>> getEmailsContacto(int id);
+    LiveData<List<Email>> getEmailsContacto(int id);
 
     @Insert
      void insertTelefono(Telefono... telefonos);
@@ -41,6 +42,11 @@ public interface ContactosDao {
     @Update
      void updateTelefono(Telefono telefono);
     @Query("SELECT * FROM Telefono WHERE ownerId=:id")
-     LiveData<List<Telefono>> getTelefonosContacto(int id);
+    LiveData<List<Telefono>> getTelefonosContacto(int id);
+
+
+
+
+
 
 }

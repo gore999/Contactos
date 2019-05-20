@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
     EditText campoBusqueda;
     RecyclerView listaContactosRecycler;
     List<Contacto> contactos;
-    AndroidViewModel viewModelMainActivity;
+    ViewModelMainActivity viewModelMainActivity;
+    Button botonBuscar;
+    ContactosAdapter contactosAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        configurar();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,14 +46,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentNewContacto);
             }
         });
-        configurar();
+
     }
 
+
     private void configurar() {
-        final ContactosAdapter contactosAdapter=new ContactosAdapter(this,contactos);
+        contactosAdapter=new ContactosAdapter(this,contactos);
         //Recuperar el viewModel
         viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);
-        ((ViewModelMainActivity) viewModelMainActivity).getContactos().observe(this, new Observer<List<Contacto>>() {
+        viewModelMainActivity.listaContactos.observe(this, new Observer<List<Contacto>>() {
             @Override
             public void onChanged(@Nullable List<Contacto> contactos) {
                 contactosAdapter.setContactos(contactos);
@@ -56,12 +62,11 @@ public class MainActivity extends AppCompatActivity {
         });
         //contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
         campoBusqueda=findViewById(R.id.editText_busqueda);
+        botonBuscar=findViewById(R.id.buttonBuscar);
         listaContactosRecycler=findViewById(R.id.ReciclerlistaContactos);
-
-
+        //Añadir el adaptador
         listaContactosRecycler.setAdapter(contactosAdapter);
         listaContactosRecycler.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     @Override
@@ -84,5 +89,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void buscarContactos(View view) {
+        String filtro=campoBusqueda.getText().toString();
+        Toast.makeText(getApplicationContext(),filtro,Toast.LENGTH_LONG).show();
+
+        viewModelMainActivity.getContactosFiltro(filtro);
+        contactosAdapter.notifyDataSetChanged();
+
     }
 }

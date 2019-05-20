@@ -11,4 +11,6 @@
     <string name="no_apellido">Debe introducir los apellidos</string>
     <string name="no_datos">Debe contener al menos un telefono o email.</string>
     <string name="no_vacio">El valor no puede estar vacio.</string>
+    <string name="texto_a_buscar">Texto a buscar</string>
+    <string name="buscar">Buscar</string>
 </resources>
