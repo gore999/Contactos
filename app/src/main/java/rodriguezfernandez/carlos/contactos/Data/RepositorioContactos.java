@@ -14,6 +14,8 @@ public class RepositorioContactos {
     private ContactosDao dao;
     public LiveData<ArrayList<Contacto>> listaContactos;
     LiveData<Contacto> c;
+    LiveData<List<Telefono>> listaTelefonos;
+    LiveData<List<Email>> listaEmails;
 
     //Constructor
 public RepositorioContactos(Application application){
@@ -66,7 +68,8 @@ public RepositorioContactos(Application application){
         dao.updateEmail(email);
     }
     //Lista de emails de un contacto concreto
-    public LiveData<List<Email>> getEmailContacto(int id){
+    public LiveData<List<Email>> getEmailsContacto(int id){
+        listaEmails=dao.getEmailsContacto(id);
         return dao.getEmailsContacto(id);
     }
 ///TELEFONOS-------------------------------------------------------------------------------------
@@ -80,7 +83,8 @@ public RepositorioContactos(Application application){
     public void updateTelefono(Telefono telefono){
         dao.updateTelefono(telefono);
     }
-    public LiveData<List<Telefono>> getEmailTelefono(int id){
+    public LiveData<List<Telefono>> getlTelefonosContacto(int id){
+       listaTelefonos=dao.getTelefonosContacto(id);
         return dao.getTelefonosContacto(id);
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Dao
 public interface ContactosDao {
+    //CONTACTOS--------------------------------------------------------------------
     @Insert
      long[] insertContacto(Contacto... contactos);
     @Delete
@@ -27,6 +28,7 @@ public interface ContactosDao {
 
     @Query("SELECT * FROM Contacto WHERE nombre like :string  ORDER BY nombre")
     LiveData<List<Contacto>> getContactosFiltro(String string);
+    //EMAILS-----------------------------------------------------------------------
 
     @Insert
      void insertEmail(Email... emails);
@@ -37,12 +39,14 @@ public interface ContactosDao {
     @Query("SELECT * FROM Email WHERE ownerId=:id")
     LiveData<List<Email>> getEmailsContacto(int id);
 
+    //TELEFONOS--------------------------------------------------------------------
     @Insert
      void insertTelefono(Telefono... telefonos);
     @Delete
      void deleteTelefono(Telefono telefono);
     @Update
      void updateTelefono(Telefono telefono);
+
     @Query("SELECT * FROM Telefono WHERE ownerId=:id")
     LiveData<List<Telefono>> getTelefonosContacto(int id);
 
