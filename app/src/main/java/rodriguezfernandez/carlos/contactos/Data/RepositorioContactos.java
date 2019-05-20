@@ -13,12 +13,14 @@ import java.util.List;
 public class RepositorioContactos {
     private ContactosDao dao;
     public LiveData<ArrayList<Contacto>> listaContactos;
+    LiveData<Contacto> c;
 
     //Constructor
 public RepositorioContactos(Application application){
-    ///Instanciar el dao.
+    ///INSTANCIAR EL DAO----------------------------------------------------------------
         dao=ContactosDB.getINSTANCE(application).getDao();
     }
+    ///---------------------------------------------------------------------------------
 
     //Operaciones basicas con contactos.
     public void insertContacto(Contacto... contactos){
@@ -32,17 +34,27 @@ public RepositorioContactos(Application application){
         dao.updateContacto(contacto);
     };
 
-// Obtener listas de contactos.
+// OBTENER CONTACTOS--------------------------------------------------------------------.
+    //Por id---------------------------------------------
+    public LiveData<Contacto> getContactoId(int id){
+        c=dao.getContactoId(id);
+        /*
+        List<Telefono> telList= (List<Telefono>) dao.getTelefonosContacto(id);
+        List<Email> emailList= (List<Email>) dao.getEmailsContacto(id);
+        */
+        return c;
+    }
+    // Todos los contactos-------------------------------
     public LiveData<List<Contacto>> getContactos(){
-
         return dao.getContactos();
     };
+    //Filtrados------------------------------------------
     public LiveData<List<Contacto>> getContactosFiltro(String s){
         listaContactos.getValue().clear();
         listaContactos.getValue().addAll((Collection<? extends Contacto>) dao.getContactosFiltro(s));
         return dao.getContactosFiltro(s);
     }
-
+//EMAILS----------------------------------------------------------------------------------------
 //Operaciones basicas con emails.
     public void insertEmail(Email... emails){
         dao.insertEmail(emails);
@@ -57,6 +69,7 @@ public RepositorioContactos(Application application){
     public LiveData<List<Email>> getEmailContacto(int id){
         return dao.getEmailsContacto(id);
     }
+///TELEFONOS-------------------------------------------------------------------------------------
 //Operaciones basicas con telefonos
     public void insertTelefono(Telefono... telefonos){
         dao.insertTelefono(telefonos);

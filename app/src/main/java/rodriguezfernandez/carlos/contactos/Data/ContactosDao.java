@@ -19,6 +19,8 @@ public interface ContactosDao {
      void deleteContacto(Contacto contacto);
     @Update
       void updateContacto(Contacto contacto);
+    @Query("SELECT * FROM Contacto WHERE id=:id")
+    LiveData<Contacto> getContactoId(int id);
 
     @Query("SELECT * FROM Contacto ORDER BY nombre")
     LiveData<List<Contacto>> getContactos();

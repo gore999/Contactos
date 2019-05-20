@@ -66,7 +66,7 @@ class ContactosAdapter extends Adapter<ContactosAdapter.ContactosViewHolder> {
 
             Intent intent=new Intent(context, ContactoVista.class);
             intent.putExtra(CONTACTO,id);
-            Toast.makeText(itemView.getContext(),nombre,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(itemView.getContext(),nombre,Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         }
     }
