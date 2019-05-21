@@ -13,4 +13,5 @@
     <string name="no_vacio">El valor no puede estar vacio.</string>
     <string name="texto_a_buscar">Texto a buscar</string>
     <string name="buscar">Buscar</string>
+    <string name="search">Buscar</string>
 </resources>

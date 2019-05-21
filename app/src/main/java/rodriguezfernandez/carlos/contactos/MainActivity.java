@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -23,12 +24,12 @@ import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
-public class MainActivity extends AppCompatActivity {
-    EditText campoBusqueda;
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
     RecyclerView listaContactosRecycler;
-    List<Contacto> contactos;
+    List<Contacto> contactosActivity;
     ViewModelMainActivity viewModelMainActivity;
-    Button botonBuscar;
+
     ContactosAdapter contactosAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void configurar() {
-        contactosAdapter=new ContactosAdapter(this,contactos);        //Crear el adaptador para el Recycler.
+        contactosAdapter=new ContactosAdapter(this,contactosActivity);        //Crear el adaptador para el Recycler.
         viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);        //Recuperar el viewModel
         viewModelMainActivity.listaContactos.observe(this, new Observer<List<Contacto>>() { // Observar la lista de contactos livedata del viewmodel.
             @Override
             public void onChanged(@Nullable List<Contacto> contactos) {
-                Toast.makeText(getApplicationContext(),"toa",Toast.LENGTH_SHORT).show();
-                contactosAdapter.setContactos(contactos);// Cuando cambie, cambiar en el adaptador.
+                contactosActivity=contactos;
+                contactosAdapter.setContactos(contactosActivity);// Cuando cambie, cambiar en el adaptador.
                 contactosAdapter.notifyDataSetChanged();
             }
         });
         //contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
-        campoBusqueda=findViewById(R.id.editText_busqueda);
-        botonBuscar=findViewById(R.id.buttonBuscar);
+
         listaContactosRecycler=findViewById(R.id.ReciclerlistaContactos);
         //Añadir el adaptador
         listaContactosRecycler.setAdapter(contactosAdapter);
@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem=menu.findItem(R.id.action_search);
+        SearchView searchView= (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -85,21 +88,27 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
 
-    public void buscarContactos(View view) {
-        String filtro=campoBusqueda.getText().toString();
-        Toast.makeText(getApplicationContext(),filtro,Toast.LENGTH_LONG).show();
-
-        viewModelMainActivity.getContactosFiltro(filtro);
-        //contactosAdapter.setContactos();
-        //contactosAdapter.notifyDataSetChanged();
-
+    @Override
+    public boolean onQueryTextChange(String s) {
+        String entrada=s.toLowerCase();
+        List<Contacto> newList=new ArrayList<>();
+        for(Contacto c: contactosActivity){
+            if(c.getNombre().toLowerCase().contains(entrada)){
+                newList.add(c);
+            }
+        }
+        contactosAdapter.setContactos(newList);
+        return false;
     }
 }

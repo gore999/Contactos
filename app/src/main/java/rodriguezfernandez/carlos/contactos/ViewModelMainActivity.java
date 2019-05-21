@@ -16,18 +16,15 @@ public class ViewModelMainActivity extends AndroidViewModel {
     RepositorioContactos rep;
     LiveData<List<Contacto>> listaContactos;
 
+
     public ViewModelMainActivity(@NonNull Application application) {
         super(application);
         rep=new RepositorioContactos(application);
         listaContactos=  rep.getContactos();
-
     }
 
     public LiveData<List<Contacto>> getContactos() {
         return listaContactos;
     }
-    public LiveData<List<Contacto>> getContactosFiltro(String cadena){
-        listaContactos= rep.getContactosFiltro(cadena);
-        return listaContactos;
-    }
+
 }
