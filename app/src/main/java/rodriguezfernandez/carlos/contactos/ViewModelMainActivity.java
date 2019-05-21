@@ -26,7 +26,8 @@ public class ViewModelMainActivity extends AndroidViewModel {
     public LiveData<List<Contacto>> getContactos() {
         return listaContactos;
     }
-    public void getContactosFiltro(String cadena){
+    public LiveData<List<Contacto>> getContactosFiltro(String cadena){
         listaContactos= rep.getContactosFiltro(cadena);
+        return listaContactos;
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RepositorioContactos {
     private ContactosDao dao;
-    public LiveData<ArrayList<Contacto>> listaContactos;
+    public LiveData<List<Contacto>> listaContactos;
     LiveData<Contacto> c;
     LiveData<List<Telefono>> listaTelefonos;
     LiveData<List<Email>> listaEmails;
@@ -40,20 +40,17 @@ public RepositorioContactos(Application application){
     //Por id---------------------------------------------
     public LiveData<Contacto> getContactoId(int id){
         c=dao.getContactoId(id);
-        /*
-        List<Telefono> telList= (List<Telefono>) dao.getTelefonosContacto(id);
-        List<Email> emailList= (List<Email>) dao.getEmailsContacto(id);
-        */
         return c;
     }
     // Todos los contactos-------------------------------
     public LiveData<List<Contacto>> getContactos(){
-        return dao.getContactos();
+
+        listaContactos=dao.getContactos();
+        return listaContactos;
     };
     //Filtrados------------------------------------------
     public LiveData<List<Contacto>> getContactosFiltro(String s){
-        listaContactos.getValue().clear();
-        listaContactos.getValue().addAll((Collection<? extends Contacto>) dao.getContactosFiltro(s));
+        listaContactos=dao.getContactosFiltro(s);
         return dao.getContactosFiltro(s);
     }
 //EMAILS----------------------------------------------------------------------------------------

@@ -51,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void configurar() {
-        contactosAdapter=new ContactosAdapter(this,contactos);
-        //Recuperar el viewModel
-        viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);
-        viewModelMainActivity.listaContactos.observe(this, new Observer<List<Contacto>>() {
+        contactosAdapter=new ContactosAdapter(this,contactos);        //Crear el adaptador para el Recycler.
+        viewModelMainActivity=ViewModelProviders.of(this).get(ViewModelMainActivity.class);        //Recuperar el viewModel
+        viewModelMainActivity.listaContactos.observe(this, new Observer<List<Contacto>>() { // Observar la lista de contactos livedata del viewmodel.
             @Override
             public void onChanged(@Nullable List<Contacto> contactos) {
-                contactosAdapter.setContactos(contactos);
+                Toast.makeText(getApplicationContext(),"toa",Toast.LENGTH_SHORT).show();
+                contactosAdapter.setContactos(contactos);// Cuando cambie, cambiar en el adaptador.
+                contactosAdapter.notifyDataSetChanged();
             }
         });
         //contactos= ((ViewModelMainActivity) viewModelMainActivity).getContactos();
@@ -97,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),filtro,Toast.LENGTH_LONG).show();
 
         viewModelMainActivity.getContactosFiltro(filtro);
-        contactosAdapter.notifyDataSetChanged();
+        //contactosAdapter.setContactos();
+        //contactosAdapter.notifyDataSetChanged();
 
     }
 }

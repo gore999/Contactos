@@ -25,7 +25,7 @@ public interface ContactosDao {
 
     @Query("SELECT * FROM Contacto ORDER BY nombre")
     LiveData<List<Contacto>> getContactos();
-
+// Usando el operador de concatenacion
     @Query("SELECT * FROM Contacto WHERE nombre like :string  ORDER BY nombre")
     LiveData<List<Contacto>> getContactosFiltro(String string);
     //EMAILS-----------------------------------------------------------------------

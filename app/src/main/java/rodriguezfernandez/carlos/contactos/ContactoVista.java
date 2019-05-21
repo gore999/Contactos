@@ -38,8 +38,11 @@ public class ContactoVista extends AppCompatActivity {
         nombre=findViewById(R.id.contactoVistaNombreTv);
         apellidos=findViewById(R.id.contactoVistaApellidostextView);
         telefonosRec=findViewById(R.id.telefsRecyclerVista);
+        emailsRec=findViewById(R.id.emailRecContactoVista);
         telfs=new ArrayList<>();
+        mails=new ArrayList<>();
         final tfAdapterContactoVista adaptertf=new tfAdapterContactoVista(getApplicationContext(),  telfs);
+        final emAdapterContactoVista adapterml=new emAdapterContactoVista(getApplicationContext(), mails);
         Intent intentDatos=getIntent();
         int id=intentDatos.getIntExtra(ContactosAdapter.CONTACTO,0);
         viewModelVistaContacto=ViewModelProviders.of(this).get(ViewModelVistaContacto.class);
@@ -47,10 +50,11 @@ public class ContactoVista extends AppCompatActivity {
         viewModelVistaContacto.getContactoId(id);
         viewModelVistaContacto.getTelefonosContacto(id);
         viewModelVistaContacto.getEmailsContacto(id);
-        Toast.makeText(getApplicationContext(),id+"",Toast.LENGTH_SHORT).show();
         //Configurar los recyclers
         telefonosRec.setAdapter(adaptertf);
+        emailsRec.setAdapter(adapterml);
         telefonosRec.setLayoutManager(new LinearLayoutManager(this));
+        emailsRec.setLayoutManager(new LinearLayoutManager(this));
         viewModelVistaContacto.contacto.observe(this, new Observer<Contacto>() {
             @Override
             public void onChanged(@Nullable Contacto contacto) {
@@ -67,7 +71,7 @@ public class ContactoVista extends AppCompatActivity {
         viewModelVistaContacto.emails.observe(this, new Observer<List<Email>>() {
             @Override
             public void onChanged(@Nullable List<Email> emails) {
-
+                adapterml.setdata(emails);
             }
         });
 

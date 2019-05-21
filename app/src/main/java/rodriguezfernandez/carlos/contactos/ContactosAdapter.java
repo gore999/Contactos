@@ -45,6 +45,7 @@ class ContactosAdapter extends Adapter<ContactosAdapter.ContactosViewHolder> {
 
     public void setContactos(List<Contacto> contactos) {
         contactosList =contactos;
+        notifyDataSetChanged();
     }
 
     class ContactosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
