@@ -101,6 +101,7 @@ public class AddContacto extends AppCompatActivity {
             ArrayList<Telefono> telefonosDelContacto = viewModelContacto.contacto.getTelefonos();
             telefonosDelContacto.add(nuevoTelefono);
             teladap.notifyDataSetChanged();
+            telefonoEdTxt.setText("");
         }else{
             Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_vacio),Toast.LENGTH_LONG);
         }
@@ -114,6 +115,7 @@ public class AddContacto extends AppCompatActivity {
             ArrayList<Email> emailsDelContacto = viewModelContacto.contacto.getEmails();
             emailsDelContacto.add(nuevoEmail);
             emailadap.notifyDataSetChanged();
+            emailEdTxt.setText("");
         }else{
             Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_vacio),Toast.LENGTH_LONG);
         }

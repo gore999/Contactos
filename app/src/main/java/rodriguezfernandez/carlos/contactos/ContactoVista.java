@@ -3,8 +3,10 @@ package rodriguezfernandez.carlos.contactos;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,6 +63,7 @@ public class ContactoVista extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Contacto contacto) {
                 if(contacto!=null) {
+
                     nombre.setText(contacto.getNombre());
                     apellidos.setText(contacto.getApellidos());
                     contactoCopia = contacto;
@@ -87,7 +90,21 @@ public class ContactoVista extends AppCompatActivity {
     }
 
     public void eliminarContacto(View view) {
-        Toast.makeText(getApplicationContext(),contactoCopia.getNombre(),Toast.LENGTH_SHORT).show();
-       viewModelVistaContacto.deleteContacto(contactoCopia);
+        AlertDialog.Builder dialog= new AlertDialog.Builder(ContactoVista.this);
+        dialog.setTitle("Atención!");
+        dialog.setMessage("Si borra el contacto, no podrá recuperarlo, ¿desea continuar?");
+        dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                viewModelVistaContacto.deleteContacto(contactoCopia);
+            }
+        });
+        dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"Cancelado",Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
     }
 }

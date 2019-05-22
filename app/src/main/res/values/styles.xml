@@ -24,12 +24,13 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">16dp</item>
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="edittext">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">textPersonName</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
