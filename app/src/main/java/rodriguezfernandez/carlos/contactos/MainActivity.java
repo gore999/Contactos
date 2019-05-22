@@ -26,6 +26,7 @@ import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
+    public static final String EXTRA_MENSAJE ="rodriguezfernandez.carlos.contactos.EXTRA.MENSAJE" ;
     RecyclerView listaContactosRecycler;
     List<Contacto> contactosActivity;
     ViewModelMainActivity viewModelMainActivity;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     ContactosAdapter contactosAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        compruebaIntents();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         configurar();
@@ -48,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
+    }
+
+    private void compruebaIntents() {
+        Intent i= getIntent();
+        if(i!=null) {
+            String mensaje = i.getStringExtra(this.EXTRA_MENSAJE);
+            if(mensaje!=null)
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+        }
     }
 
 

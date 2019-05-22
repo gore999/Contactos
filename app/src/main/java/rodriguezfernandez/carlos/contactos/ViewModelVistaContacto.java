@@ -15,9 +15,9 @@ import rodriguezfernandez.carlos.contactos.Data.Telefono;
 
 public class ViewModelVistaContacto extends AndroidViewModel {
     LiveData<Contacto> contacto;
-    LiveData<Contacto> c;
     LiveData<List<Telefono>> telefonos;
     LiveData<List<Email>> emails;
+
     RepositorioContactos rep;
     public ViewModelVistaContacto(@NonNull Application application) {
         super(application);
@@ -36,4 +36,9 @@ public class ViewModelVistaContacto extends AndroidViewModel {
         telefonos=rep.getlTelefonosContacto(id);
         return telefonos;
     }
+    public void deleteContacto(Contacto c){
+        rep.deleteContacto(c);
+
+    }
+
 }

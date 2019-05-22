@@ -38,7 +38,8 @@ public interface ContactosDao {
      void updateEmail(Email email);
     @Query("SELECT * FROM Email WHERE ownerId=:id")
     LiveData<List<Email>> getEmailsContacto(int id);
-
+    @Query(("DELETE FROM email WHERE ownerId=:id"))
+    void deleteEmailsXID(int id);
     //TELEFONOS--------------------------------------------------------------------
     @Insert
      void insertTelefono(Telefono... telefonos);
@@ -49,6 +50,10 @@ public interface ContactosDao {
 
     @Query("SELECT * FROM Telefono WHERE ownerId=:id")
     LiveData<List<Telefono>> getTelefonosContacto(int id);
+
+    @Query(("DELETE FROM telefono WHERE ownerId=:id"))
+    void deleteTelefonosXID(int id);
+
 
 
 

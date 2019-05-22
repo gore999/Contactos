@@ -117,7 +117,6 @@ public class AddContacto extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_vacio),Toast.LENGTH_LONG);
         }
-
     }
 
 
@@ -138,13 +137,15 @@ public class AddContacto extends AppCompatActivity {
                 viewModelContacto.saveContacto();
                 break;
         }
+        Intent intent=new Intent(AddContacto.this,MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_MENSAJE, "Guardado con exito");
+        startActivity(intent);
     }
 
     //Devuelve un valor entero que representa un estado del contacto. 
     private int compruebaCampos() {
         int salida=-1;
         Contacto c=viewModelContacto.contacto;
-
         if(c.getTelefonos().size()==0 & c.getEmails().size()==0)salida=2;//2 es Tiene que guardar algun contacto.
         if(c.getApellidos().toString().isEmpty())salida=1;//1 es No hay apellidos.
         if(c.getNombre().toString().isEmpty())salida=0;//0 es No hay nombre

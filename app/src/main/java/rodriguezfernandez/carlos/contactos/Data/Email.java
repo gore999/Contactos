@@ -7,8 +7,7 @@ import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Contacto.class,parentColumns =
-"id",childColumns = "ownerId",onDelete = CASCADE))
+@Entity (foreignKeys = @ForeignKey(entity = Contacto.class,parentColumns ="id",childColumns = "ownerId",onDelete = CASCADE))
 public class Email {
     @PrimaryKey(autoGenerate = true)
     @NonNull
