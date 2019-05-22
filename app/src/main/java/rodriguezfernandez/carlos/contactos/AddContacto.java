@@ -1,10 +1,16 @@
 package rodriguezfernandez.carlos.contactos;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddContacto extends AppCompatActivity {
+    private static final int NOT_ID =0 ;
     EditText nombre;
     EditText apellido;
     EditText telefonoEdTxt;
@@ -27,6 +34,8 @@ public class AddContacto extends AppCompatActivity {
     RecyclerView recyTelefonos;
     RecyclerView recyEmails;
     ViewModelAddContacto viewModelContacto;
+    NotificationManager miManager;
+    private static String CANAL_ID="rodriguezfernandez.carlos.contactos.MICANAL";
 ///Adaptadores
     telefonoAdapter teladap;
     EmailAdapter emailadap;
@@ -35,7 +44,9 @@ public class AddContacto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contacto);
+        miManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         config();
+
     }
 /*Configurar la vista: Crear Objetos para los elementos del LayOut, crear elViewwModel,
    instanciar adaptadores....
@@ -139,6 +150,8 @@ public class AddContacto extends AppCompatActivity {
                 viewModelContacto.saveContacto();
                 break;
         }
+        crearCanal();
+        miManager.notify(NOT_ID,getBuider(viewModelContacto.contacto).build());
         Intent intent=new Intent(AddContacto.this,MainActivity.class);
         intent.putExtra(MainActivity.EXTRA_MENSAJE, "Guardado con exito");
         startActivity(intent);
@@ -152,6 +165,28 @@ public class AddContacto extends AppCompatActivity {
         if(c.getApellidos().toString().isEmpty())salida=1;//1 es No hay apellidos.
         if(c.getNombre().toString().isEmpty())salida=0;//0 es No hay nombre
     return salida;
+    }
+    private void crearCanal(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
+            NotificationChannel canal = new NotificationChannel(CANAL_ID, "Contactos", NotificationManager.IMPORTANCE_HIGH);
+            canal.enableVibration(true);
+            canal.setDescription("Notificaciones desde contactos");
+            canal.enableLights(true);
+            canal.setLightColor(Color.RED);
+            miManager.createNotificationChannel(canal);
+        }
+    }
+    private NotificationCompat.Builder getBuider(Contacto c){
+        Intent intent=new Intent(this,MainActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,NOT_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(getApplicationContext(),CANAL_ID)
+                .setContentTitle("Contacto creado")
+                .setContentText(c.getNombre()+" "+c.getApellidos()+" se ha añadido con exito")
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.ic_contacto);
+        return builder;
     }
 
 }
