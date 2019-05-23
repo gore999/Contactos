@@ -15,4 +15,5 @@
     <string name="buscar">Buscar</string>
     <string name="search">Buscar</string>
     <string name="eliminar_contacto">eliminar contacto</string>
+    <string name="contactos_disponibles">Contactos disponibles</string>
 </resources>

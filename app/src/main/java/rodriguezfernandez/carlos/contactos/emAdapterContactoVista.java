@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
     @Override
     public EmailViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //Inflamos el layout
-        View v=inflater.inflate(R.layout.email_layout,viewGroup,false);
+        View v=inflater.inflate(R.layout.email_layoutvistacontacto,viewGroup,false);
         //devolvemos el viewholder
         return new EmailViewHolder(v,this);
     }
@@ -37,6 +38,7 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
     public void onBindViewHolder(@NonNull EmailViewHolder emailViewHolder, int i) {
         //Vinculamos los datos
         emailViewHolder.email.setText(emails.get(i).getEmail()+"");
+        emailViewHolder.imagen.setImageResource(R.drawable.sobre_redondo);
     }
 
     @Override
@@ -51,10 +53,12 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
 
     class EmailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView email;
+        ImageView imagen;
         emAdapterContactoVista emAdapter;
         public EmailViewHolder(@NonNull View itemView, emAdapterContactoVista adapter) {
             super(itemView);
             email=itemView.findViewById(R.id.emailTxtVw);
+            imagen=itemView.findViewById(R.id.imageViewmail);
             emAdapter=adapter;
             itemView.setOnClickListener(this);
         }

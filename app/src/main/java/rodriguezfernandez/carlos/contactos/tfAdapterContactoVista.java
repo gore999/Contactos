@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.Telef
     @Override
     public TelefonoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //Inflamos el layout
-        View v=inflater.inflate(R.layout.telefono_layout,viewGroup,false);
+        View v=inflater.inflate(R.layout.telefono_layoutvistacontacto,viewGroup,false);
         //devolvemos el viewholder
         return new TelefonoViewHolder(v,this);
     }
@@ -38,6 +39,7 @@ public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.Telef
     public void onBindViewHolder(@NonNull TelefonoViewHolder telefonoViewHolder, int i) {
         //Vinculamos los datos
         telefonoViewHolder.telefono.setText(telefs.get(i).getTelefono()+"");
+        telefonoViewHolder.imagen.setImageResource(R.drawable.telefono_redondo);
     }
 
     @Override
@@ -52,10 +54,12 @@ public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.Telef
     }
     class TelefonoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView telefono;
+        ImageView imagen;
         tfAdapterContactoVista telAdapter;
         public TelefonoViewHolder(@NonNull View itemView,tfAdapterContactoVista adapter) {
             super(itemView);
             telefono=itemView.findViewById(R.id.txtvw_telefono_adapter);
+            imagen=itemView.findViewById(R.id.telefonoImagenView);
             telAdapter=adapter;
             itemView.setOnClickListener(this);
         }
