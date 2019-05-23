@@ -115,8 +115,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextChange(String s) {
         String entrada=s.toLowerCase();
         List<Contacto> newList=new ArrayList<>();
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
         for(Contacto c: contactosActivity){
-            if(c.getNombre().toLowerCase().contains(entrada)){
+            if(c.getNombre().toLowerCase().startsWith(entrada) | c.getApellidos().toLowerCase().startsWith(entrada)){
+
                 newList.add(c);
             }
         }
