@@ -146,15 +146,17 @@ public class AddContacto extends AppCompatActivity {
             case 2:
                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_datos), Toast.LENGTH_LONG).show();
                 break;
-            case -1:// Si todo está correcto.
+            default:// Si todo está correcto.
                 viewModelContacto.saveContacto();
+                crearCanal();
+                miManager.notify(NOT_ID,getBuider(viewModelContacto.contacto).build());
+                Intent intent=new Intent(AddContacto.this,MainActivity.class);
+                intent.putExtra(MainActivity.EXTRA_MENSAJE, "Guardado con exito");
+                startActivity(intent);
                 break;
+
         }
-        crearCanal();
-        miManager.notify(NOT_ID,getBuider(viewModelContacto.contacto).build());
-        Intent intent=new Intent(AddContacto.this,MainActivity.class);
-        intent.putExtra(MainActivity.EXTRA_MENSAJE, "Guardado con exito");
-        startActivity(intent);
+
     }
 
     //Devuelve un valor entero que representa un estado del contacto. 
