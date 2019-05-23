@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rodriguezfernandez.carlos.contactos">
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name=".ContactosBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"></action>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MainActivity"
@@ -25,9 +34,10 @@
         </activity>
         <activity
             android:name=".AddContacto"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".ContactoVista"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ContactoVista"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
