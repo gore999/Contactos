@@ -25,7 +25,8 @@ import java.util.List;
 import rodriguezfernandez.carlos.contactos.Data.Contacto;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-
+    public static final String KEY_NOMBRE ="nombre_usuario" ;
+    public static final String KEY_SUBJECT ="email_subject" ;
     public static final String EXTRA_MENSAJE ="rodriguezfernandez.carlos.contactos.EXTRA.MENSAJE" ;
     RecyclerView listaContactosRecycler;
     List<Contacto> contactosActivity;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 startActivity(intentNewContacto);
             }
         });
+        android.support.v7.preference.PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
 
     }
 
@@ -103,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (id == R.id.action_search) {
             return true;
         }
+        if(id== R.id.action_settings){
+            Intent intent=new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

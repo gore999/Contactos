@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="Usuario de Contactos.app"
+        android:dialogIcon="@drawable/sobre_redondo"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:key="nombre_usuario"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Escriba aqui su nombre para utilizar en sus mensajes"
+        android:title="Nombre del usuario" />
+    <EditTextPreference
+        android:defaultValue="Otro mensaje de la app para PMDM"
+        android:key="email_subject"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Texto que se añadirá al subject de sus correos."
+        android:title="Subject por defecto" />
+</PreferenceScreen>

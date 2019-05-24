@@ -8,4 +8,10 @@
         android:title="@string/search"
         app:showAsAction="ifRoom"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="50"
+        android:title="@string/ajustes"
+        app:showAsAction="always"
+        />
 </menu>
