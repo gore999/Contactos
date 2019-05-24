@@ -2,7 +2,9 @@ package rodriguezfernandez.carlos.contactos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -18,13 +20,22 @@ import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Email;
 
+import static rodriguezfernandez.carlos.contactos.MainActivity.*;
+
 public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.EmailViewHolder> {
     private List<Email> emails;
     private LayoutInflater inflater;
+    String usuario;
+    String subject;
     emAdapterContactoVista(Context context, List<Email>emailsListaImportada){
         inflater=LayoutInflater.from(context);
         emails =emailsListaImportada;
+        SharedPreferences shpref=android.support.v7.preference.PreferenceManager
+                .getDefaultSharedPreferences(context.getApplicationContext());
+        usuario=shpref.getString(MainActivity.KEY_NOMBRE,"Usuario");
+        subject=shpref.getString(MainActivity.KEY_SUBJECT,"Mensaje enviado desde PMDM app");
     }
+
     @NonNull
     @Override
     public EmailViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -72,7 +83,7 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
 
             //Usar un ACTION_DIAL no un PHONE CALL.
             Intent intent=new Intent(Intent.ACTION_SENDTO,llamarA);
-            intent.putExtra(Intent.EXTRA_SUBJECT,"Enviado desde mi primera aplicacion PMDM");
+            intent.putExtra(Intent.EXTRA_SUBJECT,subject+" //autor: "+usuario);
             if (intent.resolveActivity(context.getPackageManager()) != null) {
                 context.startActivity(intent);
                 context.startActivity(intent);
