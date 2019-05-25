@@ -27,7 +27,7 @@
     <string name="eliminado"> Eliminado con éxito </string>
     <string name="pregunta_eliminar">Si borra el contacto, no podrá recuperarlo, ¿desea continuar?</string>
     <string name="atencion">¡Atención!</string>
-<string name="borrar">Borrar</string>
+    <string name="borrar">Borrar</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

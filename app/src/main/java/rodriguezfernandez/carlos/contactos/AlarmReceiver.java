@@ -27,8 +27,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     private void creaCanal(Context context){
         manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            NotificationChannel canal=new NotificationChannel(CANAL_ID,"Canal de avisos",NotificationManager.IMPORTANCE_HIGH);
-            canal.setDescription("Recordatorios de contactar con alguien");
+            NotificationChannel canal=new NotificationChannel(CANAL_ID,context.getString(R.string.alert_channel),NotificationManager.IMPORTANCE_HIGH);
+            canal.setDescription(context.getString(R.string.recordatorios));
             canal.enableLights(true);
             canal.enableVibration(true);
             canal.setLightColor(Color.GREEN);
@@ -39,8 +39,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         intent.putExtra(ContactosAdapter.CONTACTO,NOTIFICACION_ID);
         PendingIntent pint=PendingIntent.getActivity(context,NOTIFICACION_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder=new NotificationCompat.Builder(context,CANAL_ID);
-        builder.setContentTitle("Recordatorio de llamada")
-                .setContentText("Debe llamar a "+persona)
+        builder.setContentTitle(context.getString(R.string.recordatorio))
+                .setContentText(context.getString(R.string.debe_llamar)+persona)
                 .setSmallIcon(R.drawable.ic_contacto)
                 .setAutoCancel(true)
                 .setContentIntent(pint)

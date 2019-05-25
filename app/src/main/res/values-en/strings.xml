@@ -1,33 +1,33 @@
 <resources>
-    <string name="app_name">Contactos</string>
+    <string name="app_name">Contacts</string>
     <string name="action_settings">Settings</string>
-    <string name="nombre">Nombre:</string>
-    <string name="apellidos">Apellidos:</string>
-    <string name="telefono">Telefono:</string>
+    <string name="nombre">Name:</string>
+    <string name="apellidos">Surname:</string>
+    <string name="telefono">Telephone:</string>
     <string name="e_mail">E-Mail:</string>
     <string name="add">Add</string>
-    <string name="a_adir_contacto">Añadir Contacto</string>
-    <string name="no_nombre">Debe introducir un nombre</string>
-    <string name="no_apellido">Debe introducir los apellidos</string>
-    <string name="no_datos">Debe contener al menos un telefono o email.</string>
-    <string name="no_vacio">El valor no puede estar vacio.</string>
-    <string name="texto_a_buscar">Texto a buscar</string>
-    <string name="buscar">Buscar</string>
-    <string name="search">Buscar</string>
-    <string name="eliminar_contacto">eliminar contacto</string>
-    <string name="contactos_disponibles">Contactos disponibles</string>
+    <string name="a_adir_contacto">Add contact</string>
+    <string name="no_nombre">Name is required</string>
+    <string name="no_apellido">Surname is required</string>
+    <string name="no_datos">Must contain one phone or mail at least.</string>
+    <string name="no_vacio">Must have any value(no null).</string>
+    <string name="texto_a_buscar">Text to search</string>
+    <string name="buscar">Search</string>
+    <string name="search">Search</string>
+    <string name="eliminar_contacto">remove contact</string>
+    <string name="contactos_disponibles">Avaiable contacts</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="notificaciones_desde_contactos">Notificaciones desde contactos</string>
-    <string name="contacto_creado">Contacto creado</string>
-    <string name="add_exito"> se ha añadido con exito</string>
-    <string name="alert_channel">Canal de avisos</string>
-    <string name="recordatorios">Recordatorios de contactar con alguien</string>
-    <string name="recordatorio">Recordatorio de llamada</string>
-    <string name="debe_llamar">Debe llamar a </string>
-    <string name="eliminado"> Eliminado con éxito </string>
-    <string name="pregunta_eliminar">Si borra el contacto, no podrá recuperarlo, ¿desea continuar?</string>
-    <string name="atencion">¡Atención!</string>
-<string name="borrar">Borrar</string>
+    <string name="notificaciones_desde_contactos">Notifications from contacts</string>
+    <string name="contacto_creado">Created a new contact</string>
+    <string name="add_exito"> added successfun</string>
+    <string name="alert_channel">Alert Chanel</string>
+    <string name="recordatorios">Remember to contact someone</string>
+    <string name="recordatorio">Remember to call</string>
+    <string name="debe_llamar">Must call </string>
+    <string name="eliminado"> Successfull removed </string>
+    <string name="pregunta_eliminar">This can be undone. Want to continue?</string>
+    <string name="atencion">Atention!</string>
+    <string name="borrar">Delete</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -103,11 +103,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="telefonos">Telefonos:</string>
+    <string name="telefonos">Telephones:</string>
     <string name="emails">Emails</string>
-    <string name="llamar_dentro_de">Llamar dentro de...</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="cancelado">Cancelado</string>
-    <string name="llamar_intervalo">Llamar dentro de</string>
-    <string name="autor">//autor:</string>
+    <string name="llamar_dentro_de">Call in....</string>
+    <string name="cancelar">Cancel</string>
+    <string name="cancelado">Cancelled</string>
+    <string name="llamar_intervalo">Call in</string>
+    <string name="autor">//author:</string>
 </resources>

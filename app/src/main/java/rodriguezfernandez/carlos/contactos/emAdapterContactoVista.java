@@ -83,7 +83,9 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
 
             //Usar un ACTION_DIAL no un PHONE CALL.
             Intent intent=new Intent(Intent.ACTION_SENDTO,llamarA);
-            intent.putExtra(Intent.EXTRA_SUBJECT,subject+" //autor: "+usuario);
+            intent.putExtra(Intent.EXTRA_SUBJECT,subject+context.getString(R.string.autor)+usuario);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//Me da un error en mi movil. Que necesita ese Flag el intent. ?¿?¿
+
             if (intent.resolveActivity(context.getPackageManager()) != null) {
                 context.startActivity(intent);
                 context.startActivity(intent);

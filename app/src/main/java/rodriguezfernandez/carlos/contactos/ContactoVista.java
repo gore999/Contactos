@@ -85,7 +85,7 @@ public class ContactoVista extends AppCompatActivity {
                     contactoCopia = contacto;
                 }else{//Si el contacto es nulo, daría error. Así que lo que hacemos es volver a la pantalla de inicio.
                     Intent i=new Intent(ContactoVista.this,MainActivity.class);
-                    i.putExtra(MainActivity.EXTRA_MENSAJE,"Eliminado con exito");
+                    i.putExtra(MainActivity.EXTRA_MENSAJE,getString(R.string.eliminado));
                     startActivity(i);
                 }
             }
@@ -107,18 +107,18 @@ public class ContactoVista extends AppCompatActivity {
 
     public void eliminarContacto(View view) {
         AlertDialog.Builder dialog= new AlertDialog.Builder(ContactoVista.this);
-        dialog.setTitle("Atención!");
-        dialog.setMessage("Si borra el contacto, no podrá recuperarlo, ¿desea continuar?");
-        dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+        dialog.setTitle(getString(R.string.atencion));
+        dialog.setMessage(getString(R.string.pregunta_eliminar));
+        dialog.setPositiveButton(getString(R.string.borrar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 viewModelVistaContacto.deleteContacto(contactoCopia);
             }
         });
-        dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"Cancelado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.cancelado),Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
@@ -131,7 +131,7 @@ public class ContactoVista extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Calendar calendar=Calendar.getInstance();//Instancia calendar
 
-                Toast.makeText(getApplicationContext(),"recordatorio fijado para las "+hourOfDay+":"+minute,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.llamar_intervalo)+hourOfDay+"h:"+minute+"m",Toast.LENGTH_SHORT).show();
                 long ahora= calendar.getTimeInMillis();
                 long lapso=1000*(hourOfDay*3600+minute*60);//Milisegundos
                 Intent intent=new Intent(ContactoVista.this,AlarmReceiver.class);

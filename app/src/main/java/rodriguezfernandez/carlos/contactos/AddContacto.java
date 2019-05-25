@@ -172,7 +172,7 @@ public class AddContacto extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
             NotificationChannel canal = new NotificationChannel(CANAL_ID, "Contactos", NotificationManager.IMPORTANCE_HIGH);
             canal.enableVibration(true);
-            canal.setDescription("Notificaciones desde contactos");
+            canal.setDescription(getResources().getString(R.string.notificaciones_desde_contactos));
             canal.enableLights(true);
             canal.setLightColor(Color.RED);
             miManager.createNotificationChannel(canal);
@@ -182,8 +182,8 @@ public class AddContacto extends AppCompatActivity {
         Intent intent=new Intent(this,MainActivity.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,NOT_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder=new NotificationCompat.Builder(getApplicationContext(),CANAL_ID)
-                .setContentTitle("Contacto creado")
-                .setContentText(c.getNombre()+" "+c.getApellidos()+" se ha añadido con exito")
+                .setContentTitle(getString(R.string.contacto_creado))
+                .setContentText(c.getNombre()+" "+c.getApellidos()+getString(R.string.add_exito))
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)

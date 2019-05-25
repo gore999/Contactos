@@ -72,6 +72,7 @@ public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.Telef
             Uri llamarA=Uri.parse("tel:"+telefs.get(pos).getTelefono());
             //Usar un ACTION_DIAL no un PHONE CALL.
             Intent intent=new Intent(Intent.ACTION_DIAL,llamarA);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             if (intent.resolveActivity(context.getPackageManager()) != null) {
                 context.startActivity(intent);
