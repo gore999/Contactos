@@ -12,9 +12,11 @@ public abstract class ContactosDB extends RoomDatabase {
 
     public static ContactosDB getINSTANCE(Context context) {
         if( INSTANCE==null) {
-            synchronized (Contacto.class){
+            synchronized (ContactosDB.class){
                 if(INSTANCE==null){
-                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(),ContactosDB.class,"contactos").build();
+                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(),ContactosDB.class,"contactos")
+                            .fallbackToDestructiveMigration()
+                            .build();
                 }
             }
         }
