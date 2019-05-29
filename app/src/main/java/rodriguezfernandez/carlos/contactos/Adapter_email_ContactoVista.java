@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -20,14 +19,12 @@ import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Email;
 
-import static rodriguezfernandez.carlos.contactos.MainActivity.*;
-
-public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.EmailViewHolder> {
+public class Adapter_email_ContactoVista extends Adapter<Adapter_email_ContactoVista.EmailViewHolder> {
     private List<Email> emails;
     private LayoutInflater inflater;
     String usuario;
     String subject;
-    emAdapterContactoVista(Context context, List<Email>emailsListaImportada){
+    Adapter_email_ContactoVista(Context context, List<Email>emailsListaImportada){
         inflater=LayoutInflater.from(context);
         emails =emailsListaImportada;
         SharedPreferences shpref=android.support.v7.preference.PreferenceManager
@@ -65,8 +62,8 @@ public class emAdapterContactoVista extends Adapter<emAdapterContactoVista.Email
     class EmailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView email;
         ImageView imagen;
-        emAdapterContactoVista emAdapter;
-        public EmailViewHolder(@NonNull View itemView, emAdapterContactoVista adapter) {
+        Adapter_email_ContactoVista emAdapter;
+        public EmailViewHolder(@NonNull View itemView, Adapter_email_ContactoVista adapter) {
             super(itemView);
             email=itemView.findViewById(R.id.emailTxtVw);
             imagen=itemView.findViewById(R.id.imageViewmail);

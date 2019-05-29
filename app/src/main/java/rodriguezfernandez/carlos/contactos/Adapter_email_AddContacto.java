@@ -12,12 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import rodriguezfernandez.carlos.contactos.Data.Email;
-import rodriguezfernandez.carlos.contactos.Data.Telefono;
 
-public class EmailAdapter extends Adapter<EmailAdapter.EmailViewHolder> {
+public class Adapter_email_AddContacto extends Adapter<Adapter_email_AddContacto.EmailViewHolder> {
     private ArrayList<Email> emailList;
     private LayoutInflater inflater;
-    EmailAdapter(Context context, ArrayList<Email>emailsListaImportada){
+    Adapter_email_AddContacto(Context context, ArrayList<Email>emailsListaImportada){
         inflater=LayoutInflater.from(context);
         emailList =emailsListaImportada;
     }
@@ -42,8 +41,8 @@ public class EmailAdapter extends Adapter<EmailAdapter.EmailViewHolder> {
     }
     class EmailViewHolder extends RecyclerView.ViewHolder{
         TextView email;
-        EmailAdapter emailAdapter;
-        public EmailViewHolder(@NonNull View itemView,EmailAdapter adapter) {
+        Adapter_email_AddContacto emailAdapter;
+        public EmailViewHolder(@NonNull View itemView,Adapter_email_AddContacto adapter) {
             super(itemView);
             email=itemView.findViewById(R.id.emailTxtVw);
             emailAdapter=adapter;

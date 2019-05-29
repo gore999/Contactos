@@ -3,8 +3,6 @@ package rodriguezfernandez.carlos.contactos;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,12 +16,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import rodriguezfernandez.carlos.contactos.Data.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddContacto extends AppCompatActivity {
     private static final int NOT_ID =0 ;
@@ -38,7 +34,7 @@ public class AddContacto extends AppCompatActivity {
     private static String CANAL_ID="rodriguezfernandez.carlos.contactos.MICANAL";
 ///Adaptadores
     telefonoAdapter teladap;
-    EmailAdapter emailadap;
+    Adapter_email_AddContacto emailadap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +77,7 @@ public class AddContacto extends AppCompatActivity {
         ithTelefonos.attachToRecyclerView(recyTelefonos);
 //RecyclerView emails.
         //Crear el adaptador, la lista que se le pasa, es la de los emails.
-        emailadap=new EmailAdapter(this,viewModelContacto.contacto.getEmails());
+        emailadap=new Adapter_email_AddContacto(this,viewModelContacto.contacto.getEmails());
         //helper
         ItemTouchHelper ithEmails=new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
             @Override

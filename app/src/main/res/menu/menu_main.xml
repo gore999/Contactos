@@ -12,6 +12,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="50"
         android:title="@string/ajustes"
-        app:showAsAction="always"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom"
         />
 </menu>

@@ -14,15 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rodriguezfernandez.carlos.contactos.Data.Telefono;
 
-public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.TelefonoViewHolder> {
+public class Adapter_telefono_ContactoVista extends Adapter<Adapter_telefono_ContactoVista.TelefonoViewHolder> {
     private List<Telefono> telefs;
     private LayoutInflater inflater;
-    tfAdapterContactoVista(Context context, List<Telefono>telefonosListaImportada){
+    Adapter_telefono_ContactoVista(Context context, List<Telefono>telefonosListaImportada){
         inflater=LayoutInflater.from(context);
         telefs=telefonosListaImportada;
     }
@@ -55,8 +54,8 @@ public class tfAdapterContactoVista extends Adapter<tfAdapterContactoVista.Telef
     class TelefonoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView telefono;
         ImageView imagen;
-        tfAdapterContactoVista telAdapter;
-        public TelefonoViewHolder(@NonNull View itemView,tfAdapterContactoVista adapter) {
+        Adapter_telefono_ContactoVista telAdapter;
+        public TelefonoViewHolder(@NonNull View itemView,Adapter_telefono_ContactoVista adapter) {
             super(itemView);
             telefono=itemView.findViewById(R.id.txtvw_telefono_adapter);
             imagen=itemView.findViewById(R.id.telefonoImagenView);

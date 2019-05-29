@@ -1,7 +1,6 @@
 package rodriguezfernandez.carlos.contactos;
 
 import android.app.AlarmManager;
-import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.arch.lifecycle.LiveData;
@@ -9,20 +8,16 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,8 +55,8 @@ public class ContactoVista extends AppCompatActivity {
         emailsRec=findViewById(R.id.emailRecContactoVista);
         telfs=new ArrayList<>();
         mails=new ArrayList<>();
-        final tfAdapterContactoVista adaptertf=new tfAdapterContactoVista(getApplicationContext(),  telfs);
-        final emAdapterContactoVista adapterml=new emAdapterContactoVista(getApplicationContext(), mails);
+        final Adapter_telefono_ContactoVista adaptertf=new Adapter_telefono_ContactoVista(getApplicationContext(),  telfs);
+        final Adapter_email_ContactoVista adapterml=new Adapter_email_ContactoVista(getApplicationContext(), mails);
         Intent intentDatos=getIntent();
         int id=intentDatos.getIntExtra(ContactosAdapter.CONTACTO,0);
         viewModelVistaContacto=ViewModelProviders.of(this).get(ViewModelVistaContacto.class);
